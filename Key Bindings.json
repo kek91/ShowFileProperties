@@ -1,0 +1,3 @@
+[
+	{ "keys": ["Alt+Return"], "command": "show_file_properties" }
+]
