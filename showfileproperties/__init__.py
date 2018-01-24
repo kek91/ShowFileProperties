@@ -1,4 +1,5 @@
 from fman import DirectoryPaneCommand, load_json, show_alert
+from fman.url import as_human_readable
 from os import stat, path, walk
 import datetime
 
@@ -27,6 +28,7 @@ class ShowFileProperties(DirectoryPaneCommand):
 
         if len(selected_files) > 1:
             for n in selected_files:
+                n = as_human_readable(n)
                 if path.isdir(n):
                     folders_num += 1
                     fsubfiles += calculate_size_subdirectories(n)
@@ -45,6 +47,7 @@ class ShowFileProperties(DirectoryPaneCommand):
                 n = selected_files[0]
             elif len(selected_files) == 0 and self.get_chosen_files():
                 n = self.get_chosen_files()[0]
+            n = as_human_readable(n)
             files_size += stat(n).st_size
             finfo = stat(n)
             flastmodified = datetime.date.fromtimestamp(finfo.st_mtime)
